@@ -1,10 +1,3 @@
-const express = require('express');
-
-const app = express();
-
-app.get('/', (req, res) => {
-  res.status(200).send();
-  console.log('Servidor rodando na porta: 3001');
-});
+const app = require('./app');
 
 app.listen(3001);
