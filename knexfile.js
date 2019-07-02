@@ -6,10 +6,10 @@ module.exports = {
       host: 'localhost',
       user: 'postgres',
       password: 'bvvr1212',
-      database: 'ApiRestNode',
+      database: 'apirestnode',
     },
-    migration: {
-      directory: 'src/migration',
+    migrations: {
+      directory: 'src/migrations',
     },
   },
 };
