@@ -3,8 +3,13 @@
  */
 const express = require('express');
 const consign = require('consign');
+const knex = require('knex');
+const knexfile = require('../knexfile');
 
 const app = express();
+
+// TODO criar chaveamento dinamico
+app.db = knex(knexfile.test);
 
 /** Consign esta responsavel para trazer para o arquivo app as rotas e os middlewares,
  * e assim distribuindo a apliação e deixando mais partilhadas.
