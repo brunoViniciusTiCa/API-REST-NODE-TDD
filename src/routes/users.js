@@ -1,6 +1,11 @@
-/** Esse module está exportando está aero function */
+/** Esse module está exportando está aero function
+ * para ser usado no arquivo routes.js com o findAll
+ * e create.
+ */
 module.exports = () => {
-  /** É uma função para achar tudo. */
+  /** É uma função para achar tudo.
+   *  Como se fosse um select no usuario.
+   */
   const findAll = (req, res) => {
     const users = [{
       name: 'Bruno Vinicius',

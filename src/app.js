@@ -1,6 +1,10 @@
-/** Fazendo as requisições */
-const app = require('express')();
+/** Requisitanto os frames que seram usados, no caso
+ *  expresse e o consign.
+ */
+const express = require('express');
 const consign = require('consign');
+
+const app = express();
 
 /** Consign esta responsavel para trazer para o arquivo app as rotas e os middlewares,
  * e assim distribuindo a apliação e deixando mais partilhadas.
@@ -10,8 +14,8 @@ consign({
   verbose: false
 })
   .include('./config/middlewares.js')
-  .then('./routes')
   .then('./config/routes.js')
+  .then('./routes')
   .into(app);
 
 /** Rota raiz para teste. */
