@@ -10,14 +10,15 @@ test('Devo verificar se usuario esta listado', () => {
     });
 });
 
-test.skip('Devo inserir um usuario', () => {
+test.only('Devo inserir um usuario', () => {
   return request(app).post('/users')
     .send({
-      name: 'Claudio Antonio',
-      mail: 'claudio@gmail.com'
+      name: 'Bruno Vinicius Felix',
+      mail: 'bruninho@gmail.com',
+      passwd: '123456'
     })
     .then((res) => {
       expect(res.status).toBe(201);
-      expect(res.body.name).toBe('Claudio Antonio');
+      expect(res.body.name).toBe('Bruno Vinicius Felix');
     });
 });
