@@ -6,15 +6,16 @@ test('Devo verificar se usuario esta listado', () => {
   return request(app).get('/users')
     .then((res) => {
       expect(res.status).toBe(200);
-      expect(res.body).toHaveLength(0);
+      expect(res.body.length).toBeGreaterThan(0); // numA > numB
     });
 });
 
-test.only('Devo inserir um usuario', () => {
+test('Devo inserir um usuario', () => {
+  const mail = `${(Date.now())}@gmail.com`;
   return request(app).post('/users')
     .send({
       name: 'Bruno Vinicius Felix',
-      mail: 'bruninho@gmail.com',
+      mail,
       passwd: '123456'
     })
     .then((res) => {
