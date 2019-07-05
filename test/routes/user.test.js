@@ -23,3 +23,15 @@ test('Devo inserir um usuario', () => {
       expect(res.body.name).toBe('Bruno Vinicius Felix');
     });
 });
+
+test('Não deve inserir usuario sem nome!', () => {
+  return request(app).post('/users')
+    .send({
+      mail: 'Bruninho@gmail.com',
+      passwd: '123456'
+    })
+    .then((res) => {
+      expect(res.status).toBe(400);
+      expect(res.body.error).toBe('Nome é Obrigatorio.');
+    });
+});
