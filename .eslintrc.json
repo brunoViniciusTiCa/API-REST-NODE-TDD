@@ -16,6 +16,11 @@
     "rules": {
         "arrow-body-style": "off",
         "no-console": "off",
-        "comma-dangle": "off"
+        "comma-dangle": "off",
+        "Parsing error": "off",
+        "consistent-return": "off",
+        "eol-last": "off",
+        "curly": "off"
+
     }
 }
