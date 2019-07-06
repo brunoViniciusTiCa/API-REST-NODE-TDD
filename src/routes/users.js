@@ -10,8 +10,5 @@ module.exports = (app) => {
     res.status(201).json(result[0]);
   };
 
-  return {
-    findAll,
-    create,
-  };
+  return { findAll, create };
 };
