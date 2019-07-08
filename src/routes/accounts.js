@@ -11,6 +11,11 @@ module.exports = (app) => {
       .then(result => res.status(200).json(result));
   };
 
+  const get = (req, res) => {
+    app.services.account.find({ id: req.params.id })
+      .then(result => res.status(200).json(result));
+  };
 
-  return { create, getAll };
+
+  return { create, getAll, get };
 };
