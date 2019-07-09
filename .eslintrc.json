@@ -20,8 +20,6 @@
         "consistent-return": "off",
         "curly": "off",
         "consistent - return": "off",
-        "arrow-body-style": "off"
-
-
+        "arrow-body-style": "off",
     }
 }
