@@ -24,6 +24,15 @@ test('Deve inserir uma conta com sucesso', () => {
     });
 });
 
+test('Não deve inserir uma conta sem nome', () => {
+  return request(app).post(MAIN_ROUTE)
+    .send({ users_id: user.id })
+    .then((result) => {
+      expect(result.status).toBe(400);
+      expect(result.body.error).toBe('Nome é um atributo obrigatorio');
+    });
+});
+
 test('Devo listar todas as contas', () => {
   return app.db('accounts')
     .insert({ name: 'Acc list ', users_id: user.id })
@@ -61,7 +70,7 @@ test('Deve alterar uma conta', () => {
 });
 
 
-test('Deve remover uma conta', ()=> {
+test('Deve remover uma conta', () => {
   return app.db('accounts')
     .insert({ name: 'Acc to remove', users_id: user.id }, ['id'])
     .then(acc => request(app).delete(`${MAIN_ROUTE}/${acc[0].id}`))

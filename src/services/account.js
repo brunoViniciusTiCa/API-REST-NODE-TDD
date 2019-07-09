@@ -5,8 +5,10 @@ module.exports = (app) => {
    *  app.db passando no parametro a tabela (accounts).insert. E dentro do insert como parametro,
    *  passamos o account e o "*" que é pra dizer pra inserir tudo. 
    */
-  const save = (account) => {
-    return app.db('accounts').insert(account, '*');
+  const save = async (account) => {
+    if (!account.name) return { error: 'Nome é um atributo obrigatorio' }
+    
+    return app.db('accounts').insert(account, '*'); 
   };
 
   const findAll = () => {
