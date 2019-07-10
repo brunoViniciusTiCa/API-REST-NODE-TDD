@@ -1,14 +1,11 @@
 const express = require('express');
 const consign = require('consign');
 const knex = require('knex');
-// const knexLogger = require('knex-logger');
 const knexfile = require('../knexfile');
 
 const app = express();
 
 app.db = knex(knexfile.test);
-
-// app.use(knexLogger(app.db));
 
 consign({
   cwd: 'src',
