@@ -1,3 +1,5 @@
+const validationError = require('../errors/ValidationError');
+
 module.exports = (app) => {
 
   /** serviço para inserir uma conta. Não é muito diferente da logica de um insert no db.
@@ -6,7 +8,7 @@ module.exports = (app) => {
    *  passamos o account e o "*" que é pra dizer pra inserir tudo. 
    */
   const save = async (account) => {
-    if (!account.name) return { error: 'Nome é um atributo obrigatorio' }
+    if (!account.name) throw new validationError ('Nome é um atributo obrigatorio');
     
     return app.db('accounts').insert(account, '*'); 
   };

@@ -2,10 +2,13 @@
  * o app e nela pega as rotas.
  */
 module.exports = (app) => {
+
+  /**Routes para usuario */
   app.route('/users') // A palavra route é uma palavra reservada.
     .get(app.routes.users.findAll)
     .post(app.routes.users.create);
 
+  /**Routes para as contas */
   app.route('/accounts')
     .get(app.routes.accounts.getAll)
     .post(app.routes.accounts.create);
