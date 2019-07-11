@@ -3,6 +3,9 @@
  */
 module.exports = (app) => {
 
+  app.route('/auth/signin').post(app.routes.auth.signin);
+
+
   /**Routes para usuario */
   app.route('/users') // A palavra route é uma palavra reservada.
     .get(app.routes.users.findAll)

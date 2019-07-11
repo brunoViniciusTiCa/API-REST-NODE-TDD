@@ -21,6 +21,9 @@ app.get('/', (req, res) => {
   res.status(200).send();
 });
 
+/** Validação de error caso no browser seja solicitado uma rota que não exista.
+ *  Esta middleware cuidará para isso.
+ */
 app.use((err, req, res, next) => {
   const { name, message, stack } = err;
   if (name === 'ValidationError') res.status(400).json({ error: message});
