@@ -17,8 +17,20 @@ test('Devo inserir um usuario', () => {
     .then((res) => {
       expect(res.status).toBe(201);
       expect(res.body.name).toBe('Bruno Vinicius Felix');
+      expect(res.body).not.toHaveProperty('passwd');
     });
 });
+
+test('Deve armazenar senha criptografada', async () => {
+  const res = await request(app).post('/users')
+    .send({ name: 'Bruno Vinicius Felix', mail: `${Date.now()}@mail.com`, passwd: '123456' });
+    expect(res.status).toBe(201);
+    
+    const { id } = res.body;
+    const userDB = await app.services.user.findOne({ id });
+    expect(userDB.passwd).not.toBe('123456');
+});
+
 
 test('Não deve inserir usuario sem nome', () => {
   return request(app).post('/users')
