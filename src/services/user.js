@@ -12,7 +12,7 @@ module.exports = (app) => {
 
   const getPasswdHash = (passwd) => {
     const salt = bcrypt.genSaltSync(10);
-    return bcrypt.genSaltSync(passwd, salt);
+    return bcrypt.hashSync(passwd, salt);
   }
 
   const save = async (user) => {
@@ -21,7 +21,6 @@ module.exports = (app) => {
     if (!user.passwd)  throw new validationError ('Senha é um atributo obrigatorio');
 
     const userDB = await findOne({ mail: user.mail });
-
     if (userDB) throw new validationError ('Já existe usuario com esse email');
 
     const newUser = { ...user };

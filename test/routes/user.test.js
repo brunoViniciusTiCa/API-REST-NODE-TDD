@@ -28,6 +28,7 @@ test('Deve armazenar senha criptografada', async () => {
     
     const { id } = res.body;
     const userDB = await app.services.user.findOne({ id });
+    expect(userDB.passwd).not.toBeUndefined();
     expect(userDB.passwd).not.toBe('123456');
 });
 
