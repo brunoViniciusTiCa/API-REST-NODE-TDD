@@ -24,8 +24,8 @@ module.exports = (app) => {
     if (userDB) throw new validationError ('Já existe usuario com esse email');
 
     const newUser = { ...user };
-    user.passwd = getPasswdHash(user.passwd);
-    return app.db('users').insert(user, ['id', 'name', 'mail']);
+    newUser.passwd = getPasswdHash(user.passwd);
+    return app.db('users').insert(newUser, ['id', 'name', 'mail']);
   };
 
   return { findAll, save, findOne };
