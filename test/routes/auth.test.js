@@ -33,3 +33,10 @@ test('Não deve autenticar usuario com email errada', () => {
       expect(res.body.error).toBe('Usuario ou senha invalido');
     });
 });
+
+test('Não deve acessar uma rota protegida sem token', () => {
+  return request(app).get('/users')
+    .then((res) => {
+      expect(res.status).toBe(401);
+    });
+});
