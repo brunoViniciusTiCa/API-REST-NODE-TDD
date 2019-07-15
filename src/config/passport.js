@@ -1,8 +1,9 @@
 const passport = require('passport');
 const passportJwt = require('passport-jwt');
 
-const { Strategy, ExtractJwt } = passportJwt;
 const secret = 'Segredo'
+
+const { Strategy, ExtractJwt } = passportJwt;
 
 module.exports = (app) => {
   const params = {

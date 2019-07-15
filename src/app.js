@@ -7,10 +7,7 @@ const app = express();
 
 app.db = knex(knexfile.test);
 
-consign({
-  cwd: 'src',
-  verbose: false,
-})
+consign({ cwd: 'src', verbose: false })
   .include('./config/passport.js')
   .then('./config/middlewares.js')
   .then('./services')

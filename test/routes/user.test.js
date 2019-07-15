@@ -8,7 +8,11 @@ let user;
 
 /**  */
 beforeAll(async () => {
-  const res = await app.services.user.save({ name: 'User Account', mail , passwd: '123456' });
+  const res = await app.services.user.save({
+    name: 'User Account',
+    mail: `${Date.now()}@mail.com`,
+    passwd: '123456'
+  });
   user = { ...res[0] };
   user.token = jwt.encode(user, 'Segredo');
 });
