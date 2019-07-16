@@ -1,18 +1,18 @@
 /** Vai criar uma exportação de outra aeroFunction e passando por paramentro
  * o app e nela pega as rotas.
  */
-module.exports = (app) => {
+/*module.exports = (app) => {
 
   app.route('/auth/signin').post(app.routes.auth.signin);
   app.route('/auth/signup').post(app.routes.users.create);
 
-  /**Routes para usuario */
-  app.route('/users') // A palavra route é uma palavra reservada.
+  
+  app.route('/users')
     .all(app.config.passport.authenticate())
     .get(app.routes.users.findAll)
     .post(app.routes.users.create);
 
-  /**Routes para as contas */
+
   app.route('/accounts')
     .all(app.config.passport.authenticate())
     .get(app.routes.accounts.getAll)
@@ -23,4 +23,4 @@ module.exports = (app) => {
     .get(app.routes.accounts.get)
     .put(app.routes.accounts.update)
     .delete(app.routes.accounts.remove);
-};
+};*/

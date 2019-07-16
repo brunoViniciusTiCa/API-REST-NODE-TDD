@@ -1,3 +1,4 @@
+const express = require('express');
 const jwt = require('jwt-simple');
 const bcrypt = require('bcrypt-nodejs');
 const validationError = require('../../src/errors/ValidationError');
@@ -5,7 +6,9 @@ const validationError = require('../../src/errors/ValidationError');
 const secret = 'Segredo';
 
 module.exports = (app) => {
-  const signin = (req, res, next) => {
+  const router = express.Router();
+
+  router.post('/signin', (req, res, next) => {
     app.services.user.findOne({ mail: req.body.mail }) 
     .then((user) => {
 
@@ -20,7 +23,7 @@ module.exports = (app) => {
         res.status(200).json({ token });
       } else throw new validationError('Usuario ou senha invalido');
     }).catch(err => next(err));
-  };
+  });
 
-  return { signin };
+  return { router };
 }
