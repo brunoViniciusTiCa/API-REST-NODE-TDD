@@ -7,11 +7,10 @@ const secret = 'Segredo';
 
 module.exports = (app) => {
   const router = express.Router();
-
+  
   router.post('/signin', (req, res, next) => {
     app.services.user.findOne({ mail: req.body.mail }) 
     .then((user) => {
-
       if (!user) throw new validationError('Usuario ou senha invalido');
       if (bcrypt.compareSync(req.body.passwd, user.passwd)){
         const payload ={
@@ -25,5 +24,5 @@ module.exports = (app) => {
     }).catch(err => next(err));
   });
 
-  return { router };
-}
+  return router;
+};

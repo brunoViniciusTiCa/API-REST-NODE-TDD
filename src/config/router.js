@@ -1,5 +1,5 @@
 const express = require('express');
 
 module.exports = (app) => {
-  app.route('/auth', app.routes.auth);
+  app.use('/auth', app.routes.auth);
 };
