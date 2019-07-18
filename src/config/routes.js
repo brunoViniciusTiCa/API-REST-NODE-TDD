@@ -1,7 +1,7 @@
 /** Vai criar uma exportação de outra aeroFunction e passando por paramentro
  * o app e nela pega as rotas.
  */
-/*module.exports = (app) => {
+/*odule.exports = (app) => {
 
   app.route('/auth/signin').post(app.routes.auth.signin);
   app.route('/auth/signup').post(app.routes.users.create);

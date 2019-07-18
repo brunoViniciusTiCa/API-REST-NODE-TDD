@@ -1,8 +1,8 @@
 const express = require('express');
 
 module.exports = (app) => {
-  
   const router = express.Router();
+  
   router.post('/', (req, res, next) => {
     app.services.account.save(req.body)
       .then((result) => {
