@@ -7,18 +7,23 @@ module.exports = (app) => {
    *  app.db passando no parametro a tabela (accounts).insert. E dentro do insert como parametro,
    *  passamos o account e o "*" que é pra dizer pra inserir tudo. 
    */
-  const save = async (account) => {
-    if (!account.name) throw new validationError ('Nome é um atributo obrigatorio');
-    
-    return app.db('accounts').insert(account, '*'); 
-  };
 
   const findAll = (usersId) => {
-    return app.db('accounts').where({ users_id: usersId });
+    return app.db('accounts').where({ users_id: usersId }); 
   };
 
   const find = (filter = {}) => {
     return app.db('accounts').where(filter).first();
+  };
+
+
+  const save = async (account) => {
+    if (!account.name) throw new validationError('Nome é um atributo obrigatorio');
+
+    const accDb = await find({ name: account.name, users_id: account.users_id });
+    if (accDb) throw new validationError('Já existe conta com esse nome');
+
+    return app.db('accounts').insert(account, '*'); 
   };
 
   const update = (id, account) => {
@@ -34,6 +39,6 @@ module.exports = (app) => {
   }
 
   return { 
-    save, findAll, find, update, remove,
+    findAll, find, save, update, remove,
   };
 };
