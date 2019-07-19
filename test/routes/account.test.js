@@ -78,6 +78,17 @@ test('Deve retornar uma conta por Id', () => {
     });
 });
 
+test('Não deve retornar uma conta de outro usuario', () => {
+  return app.db('accounts')
+    .insert({ name: 'Acc User #2', users_id: user2.id }, ['id'])
+    .then(acc => request(app).get(`${MAIN_ROUTE}/${acc[0].id}`)
+    .set('authorization', `bearer ${user.token}`))
+    .then((res) => {
+      expect(res.status).toBe(403);
+      expect(res.body.error).toBe('Este recurso não pertence ao usuario');
+    })
+});
+
 /** Teste para alterar uma conta! Na parte do insert, ele já insere e já passa como o ultimo parametro o ID,
  *  Em seguida ele faz uma promise e enviar o que ele quer mudar, no caso o nome = acc Update.
  *  Depois na expectativa ele pega o resultado 200 para avisar que tudo ocorreu bem e em baixo o valor alterado.
