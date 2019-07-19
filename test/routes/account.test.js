@@ -3,7 +3,7 @@ const app = require('../../src/app');
 const jwt = require('jwt-simple');
 
 /** Usei a variavel Main_route para manuziar melhor. Sabendo que a rota mesmo é: '/accounts' */
-const MAIN_ROUTE = '/accounts';
+const MAIN_ROUTE = '/v1/accounts';
 let user;
 
 /**  */
