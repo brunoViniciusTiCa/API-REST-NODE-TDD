@@ -13,8 +13,8 @@ module.exports = (app) => {
     return app.db('accounts').insert(account, '*'); 
   };
 
-  const findAll = () => {
-    return app.db('accounts');
+  const findAll = (usersId) => {
+    return app.db('accounts').where({ users_id: usersId });
   };
 
   const find = (filter = {}) => {
