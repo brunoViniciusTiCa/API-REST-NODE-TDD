@@ -1,7 +1,17 @@
 const express = require('express');
 
+const RecursoIndevidoError = require('../errors/RecursosIndevidoError')
+
 module.exports = (app) => {
   const router = express.Router();
+
+  router.param('id', (req, res, next) => {
+    app.services.account.find({ id: req.params.id })
+    .then((acc) => {
+      if (acc.users_id !== req.user.id) throw new RecursoIndevidoError();
+      else next();
+    }).catch(err => next(err));
+  });
   
   router.post('/', (req, res, next) => {
     app.services.account.save({... req.body, users_id: req.user.id })
@@ -18,11 +28,7 @@ module.exports = (app) => {
 
   router.get('/:id', (req, res, next) => {
     app.services.account.find({ id: req.params.id })
-      .then((result) => {
-        if(result.users_id !== req.user.id)
-          return res.status(403).json({ error: 'Este recurso não pertence ao usuario' });
-        return res.status(200).json(result);
-      })  
+      .then(result => res.status(200).json(result)) 
       .catch(err => next(err));
   });
 
