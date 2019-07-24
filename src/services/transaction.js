@@ -3,7 +3,7 @@ module.exports = (app) => {
     return app.db('transactions')
       .join('accounts', 'accounts.id', 'acc_id')
       .where(filter)
-      .endWhere('accounts.users_id', '=', userId)
+      .andWhere('accounts.users_id', '=', userId)
       .select();
   }
 

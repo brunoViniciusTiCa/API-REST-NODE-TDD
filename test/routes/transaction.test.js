@@ -20,8 +20,8 @@ beforeAll(async () => {
    delete user.passwd;
    user.token = jwt.encode(user, 'Segredo');
    const accs = await app.db('accounts').insert([
-     { name: 'Acc #1', users_id = user.id },
-     { name: 'Acc #2', users_id = user2.id },
+     { name: 'Acc #1', users_id: user.id },
+     { name: 'Acc #2', users_id: user2.id },
    ], '*');
    [accUser, accUser2] = accs;
 });
