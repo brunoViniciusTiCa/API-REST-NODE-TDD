@@ -1,7 +1,16 @@
 const express = require('express');
+const RecursosIndevidos = require('../errors/RecursosIndevidoError')
 
 module.exports = (app) => {
   const router = express.Router();
+
+  router.param('id', (req, res, next) => {
+    app.services.transaction.find(req.user.id, {'transaction.id': req.params.id })
+      .then((result) => {
+        if (result.length > 0) next();
+        else throw new RecursosIndevidos();
+      }).catch(err => next(err));
+  });
 
   router.get('/', (req, res, next) => {
     app.services.transaction.find(req.user.id)
@@ -28,8 +37,8 @@ module.exports = (app) => {
   });
 
   router.delete('/:id', (req, res, next) => {
-    app.services.transaction.delete(req.params.id)
-      .then(result => res.status(204).send())
+    app.services.transaction.remove(req.params.id)
+      .then(() => res.status(204).send())
       .catch(err => next(err));
   });
 

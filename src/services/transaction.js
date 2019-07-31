@@ -28,7 +28,7 @@ module.exports = (app) => {
     return app.db('transactions')
       .where({ id })
       .del();
-  }
+  };
 
-  return { find, save, findOne, update };
+  return { find, save, findOne, update, remove };
 }
