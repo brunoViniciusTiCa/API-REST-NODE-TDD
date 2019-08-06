@@ -38,7 +38,5 @@ module.exports = (app) => {
     .del()
   }
 
-  return { 
-    findAll, find, save, update, remove,
-  };
+  return { findAll, find, save, update, remove };
 };

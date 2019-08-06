@@ -25,10 +25,10 @@ beforeEach(async () => {
 test('Deve inserir uma conta com sucesso', () => {
   return request(app).post(MAIN_ROUTE)
     .set('authorization', `bearer ${user.token}`)
-    .send({ name: 'Acc #1' })
+    .send({ name: 'Acc #3' })
     .then((result) => {
       expect(result.status).toBe(201);
-      expect(result.body.name).toBe('Acc #1');
+      expect(result.body.name).toBe('Acc #3');
     });
 });
 

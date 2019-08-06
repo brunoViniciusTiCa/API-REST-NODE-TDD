@@ -16,7 +16,7 @@ module.exports = (app) => {
     app.services.transaction.find(req.user.id)
      .then(result => res.status(200).json(result))
      .catch(err => next(err));
-  })
+  });
 
   router.post('/', (req, res, next) => {
     app.services.transaction.save(req.body)
