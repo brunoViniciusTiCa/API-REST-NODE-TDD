@@ -91,7 +91,3 @@ test('Não deve remover transação de outro usuario', () => {
       expect(res.body.error).toBe('Este recurso não pertence ao usuario');
     }));
 });
-
-test('', () => {
-  
-});
