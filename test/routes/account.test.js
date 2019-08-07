@@ -13,9 +13,7 @@ beforeEach(async () => {
   user = { ...res[0] };
   user.token = jwt.encode(user, 'Segredo');
   const res2 = await app.services.user.save({ name: 'User Account #2', mail: `${Date.now()}@gmail.com`, passwd: '123456' });
-  user2 = {
-    ...res2[0]
-  };
+  user2 = { ...res2[0] };
 });
 
 /** Nesse teste é apenas para verificar se inseriu uma conta. Dar um resquest passando app por paramentro,
@@ -25,10 +23,10 @@ beforeEach(async () => {
 test('Deve inserir uma conta com sucesso', () => {
   return request(app).post(MAIN_ROUTE)
     .set('authorization', `bearer ${user.token}`)
-    .send({ name: 'Acc #3' })
+    .send({ name: 'Acc User #1' })
     .then((result) => {
       expect(result.status).toBe(201);
-      expect(result.body.name).toBe('Acc #3');
+      expect(result.body.name).toBe('Acc User #1');
     });
 });
 

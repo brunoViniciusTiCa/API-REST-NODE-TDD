@@ -2,6 +2,7 @@ const validationError = require('../errors/ValidationError');
 const bcrypt = require('bcrypt-nodejs');
 
 module.exports = (app) => {
+  
   const findAll = () => {
     return app.db('users').select(['id', 'name', 'mail']);
   };

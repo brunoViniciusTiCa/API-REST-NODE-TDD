@@ -1,5 +1,6 @@
 const request = require('supertest');
 const app = require('../../src/app');
+//const jwt = require('jwt-simple');
 
 test('Deve criar usuario via signup', () => {
   return request(app).post('/auth/signup')
@@ -47,6 +48,7 @@ test('Não deve autenticar usuario com email errada', () => {
 
 test('Não deve acessar uma rota protegida sem token', () => {
   return request(app).get('/v1/users')
+    //.set('authorization', `bearer ${user.token}`)
     .then((res) => {
       expect(res.status).toBe(401);
     });

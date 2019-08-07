@@ -3,6 +3,7 @@ const express = require('express');
 module.exports = (app) => {
 
   const router = express.Router();
+  
   router.get('/', (req, res, next) => {
     app.services.user.findAll()
       .then((result) =>  res.status(200).json(result))

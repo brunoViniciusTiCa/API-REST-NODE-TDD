@@ -2,8 +2,9 @@ const request = require('supertest');
 const jwt = require('jwt-simple');
 const app = require('../../src/app');
 
-const mail = `${Date.now()}@mail.com`;
 const MAIN_ROUTE = '/v1/users'
+const mail = `${Date.now()}@mail.com`;
+
 let user;
 
 /**  */
@@ -13,12 +14,12 @@ beforeAll(async () => {
   user.token = jwt.encode(user, 'Segredo');
 });
 
-test('Devo listar todos os usuarios', () => {
+test('Deve listar todos os usuarios', () => {
   return request(app).get(MAIN_ROUTE)
     .set('authorization', `bearer ${user.token}`)
     .then((res) => {
       expect(res.status).toBe(200);
-      expect(res.body.length).toBeGreaterThan(0); // numA > numB
+      expect(res.body.length).toBeGreaterThan(0);
     });
 });
 
