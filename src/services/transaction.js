@@ -1,3 +1,5 @@
+const validarionError = require('../errors/ValidationError');
+
 module.exports = (app) => {
   const find = (userId, filter = {}) => {
     return app.db('transactions')
@@ -14,6 +16,15 @@ module.exports = (app) => {
   };
 
   const save = (transaction) => {
+
+    if (!transaction.description) throw new validarionError('Descrição é um atributo obrigatorio.');
+    if (!transaction.ammount) throw new validarionError('Valor é um atributo obrigatorio.');
+    if (!transaction.date) throw new validarionError('Data é um atributo obrigatorio.');
+    if (!transaction.acc_id) throw new validarionError('Conta é um atributo obrigatorio.');
+    if (!transaction.type) throw new validarionError('Tipo é um atributo obrigatorio.');
+    if (!(transaction.type === 'I' || transaction.type === 'O')) throw new validarionError('Este tipo não existe.');
+    
+    
     const newTransaction = {...transaction}
     if ((transaction.type === 'I' && transaction.ammount < 0)
      || (transaction.type === 'O' && transaction.ammount > 0)) {

@@ -72,6 +72,63 @@ test('Transações de saída devem ser negativas', () => {
     });
 });
 
+test('Não deve inserir uma transação sem descrição', () => {
+  return request(app).post(MAIN_ROUTE)
+    .set('authorization', `bearer ${user.token}`)
+    .send({ date: new Date(), ammount: 100, type: 'I', acc_id: accUser.id })
+    .then((res) => {
+      expect(res.status).toBe(400);
+      expect(res.body.error).toBe('Descrição é um atributo obrigatorio.');
+    });
+});
+test('Não deve inserir uma transação sem valor', () => {
+  return request(app).post(MAIN_ROUTE)
+    .set('authorization', `bearer ${user.token}`)
+    .send({ description: 'New T', date: new Date(), type: 'I', acc_id: accUser.id })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe('Valor é um atributo obrigatorio.');
+      });
+});
+test('Não deve inserir uma transação sem data', () => {
+  return request(app).post(MAIN_ROUTE)
+    .set('authorization', `bearer ${user.token}`)
+    .send({ description: 'New T', ammount: 100, type: 'I', acc_id: accUser.id })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe('Data é um atributo obrigatorio.');
+      });
+});
+
+test('Não deve inserir uma transação sem conta', () => {
+  return request(app).post(MAIN_ROUTE)
+    .set('authorization', `bearer ${user.token}`)
+    .send({ description: 'New T', date: new Date(), ammount: 100, type: 'O' })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe('Conta é um atributo obrigatorio.');
+      });
+});
+test('Não deve inserir uma transação sem tipo', () => {
+  return request(app).post(MAIN_ROUTE)
+    .set('authorization', `bearer ${user.token}`)
+    .send({ description: 'New T', date: new Date(), ammount: 100, acc_id: accUser.id })
+    .then((res) => {
+      expect(res.status).toBe(400);
+      expect(res.body.error).toBe('Tipo é um atributo obrigatorio.');
+    });
+});
+
+test('Não deve inserir uma transação com tipo invalido', () => {
+  return request(app).post(MAIN_ROUTE)
+    .set('authorization', `bearer ${user.token}`)
+    .send({ description: 'New T', date: new Date(), ammount: 100, type: 'R', acc_id: accUser.id })
+    .then((res) => {
+      expect(res.status).toBe(400);
+      expect(res.body.error).toBe('Este tipo não existe.');
+    });
+});
+
 test('Deve retornar uma transação por ID', () => {
   return app.db('transactions').insert(
     { description: 'T ID', date: new Date(), ammount: 100, type: 'I', acc_id: accUser.id }, ['id']
@@ -114,3 +171,14 @@ test('Não deve remover transação de outro usuario', () => {
       expect(res.body.error).toBe('Este recurso não pertence ao usuario');
     }));
 });
+
+test('Não deve remover conta com transação', () => {
+  return app.db('transactions').insert({ description: 'to Delete', date: new Date(), ammount: 100, type: 'I', acc_id: accUser.id
+  }, ['id']).then(() => request(app).delete(`/v1/accounts/${accUser.id}`)
+    .set('authorization', `bearer ${user.token}`)
+    .then((res) => {
+      expect(res.status).toBe(400);
+      expect(res.body.error).toBe('Essa conta possui transações associadas');
+    }));
+});
+
