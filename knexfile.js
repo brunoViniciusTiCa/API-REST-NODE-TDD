@@ -12,8 +12,7 @@ module.exports = {
       password: 'bvvr1212',
       database: 'apirestnode',
     },
-    migrations: {
-      directory: 'src/migrations',
-    },
+    migrations: { directory: 'src/migrations' },
+    seeds: { directory: 'src/seeds' },
   },
 };
