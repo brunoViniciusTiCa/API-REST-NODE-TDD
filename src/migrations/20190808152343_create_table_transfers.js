@@ -1,11 +1,10 @@
-
 exports.up = (knex, Promise) => {
   return Promise.all([
-    knex.schema.createTable('transfers',(t) => {
+    knex.schema.createTable('transfers', (t) => {
       t.increments('id').primary(),
-      t.string('description').notNull(),
-      t.date('date').notNull(),
-      t.decimal('ammount', 15, 2).notNull();
+        t.string('description').notNull(),
+        t.date('date').notNull(),
+        t.decimal('ammount', 15, 2).notNull();
       t.integer('acc_ori_id')
         .references('id')
         .inTable('accounts')
@@ -13,11 +12,11 @@ exports.up = (knex, Promise) => {
       t.integer('acc_dest_id')
         .references('id')
         .inTable('accounts')
-        .notNull();  
+        .notNull();
       t.integer('users_id')
         .references('id')
         .inTable('users')
-        .notNull();  
+        .notNull();
     }),
     knex.schema.table('transactions', (t) => {
       t.integer('transfer_id')
