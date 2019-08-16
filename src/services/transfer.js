@@ -5,5 +5,5 @@ module.exports = (app) => {
       .select();
   }
 
-  return { find }
-}
+  return { find };
+};
