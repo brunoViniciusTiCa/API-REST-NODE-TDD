@@ -4,7 +4,7 @@ const app = require('../../src/app');
 const MAIN_ROUTE = '/v1/tranfers';
 const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAwMDAsIm5hbWUiOiJMb25ndWluaG8gdXNlciAjMSIsIm1haWwiOiJ1c2VyMUBnbWFpbC5jb20ifQ.ONlO-k5tuViXjrTlpDonO2g8YO7cMzKZsrlpi43Z4v8'
 
-test('Deve listar apenas transferências do usuário', () => {
+test('Deve listar apenas as transferências do usuário', () => {
   return request(app).get(MAIN_ROUTE)
     .set('authorization', `bearer ${TOKEN}`)
     .then((res) => {
